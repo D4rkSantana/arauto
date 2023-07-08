@@ -1,18 +1,9 @@
 from classes import Contact as ct
 from classes import Auto as aut
+from classes import DataProcess as dp
 
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
+contact = ct.Contact('Emerson', '5511962676520')
+print(contact.getName(), contact.getName(), contact.time, contact.total_time)
 
-
-import time
-import os
-
-
-
-#envio das mensagens
-#for index in contact_df.index:
-#    nome = contact_df.loc[index, 'Nome']
-#    numero = contact_df.loc[index, 'Numero']
-#    send_mensage(nome, numero, arquivo)
+data = dp.DataProcess('arquvios/contatos.xlsx', 'arquivos/urubu-do-pix.jpg')
+data = dp.DataProcess()
