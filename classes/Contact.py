@@ -8,6 +8,9 @@ class Contact:
         self.__name = name
         self.__number = parse_number(number)
 
+    def getTime(self):
+        return 10
+
     def getName(self):
         return self.__name
 

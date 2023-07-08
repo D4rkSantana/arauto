@@ -5,6 +5,8 @@ import time
 from urllib.parse import quote
 import Contact
 
+# Inicializa vazia e configura com o nome do arquivo de config
+# Classe para agrupar as xpath e deixar mais organizado
 class Xpath:
     def __init__(self):
         self.send_msg = '/html/body/div[1]/div/div/div[5]/div/footer/div[1]/div/span[2]/div/div[2]/div[2]'
@@ -12,6 +14,14 @@ class Xpath:
         self.input_doc = '/html/body/div[1]/div/div/div[5]/div/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/div/ul/li[1]/button/input'
         self.input_send = '/html/body/div[1]/div/div/div[3]/div[2]/span/div/span/div/div/div[2]/div/div[2]/div[2]/div/div'
 
+    def config(self, archive):
+        print("configurar")
+        # ler arquivo
+        # cortar as linhas e extrair os xpaths
+        # salvar os xpaths nas variaveis
+
+# Classe auto recebe qual o browser e o arquivo com os xpaths
+# Essa classe opera todas as questões com o broser
 class Auto:
     def __init__(self, browser:str):
         self.xpath = Xpath()

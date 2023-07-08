@@ -1,10 +1,11 @@
-import Contact as ct
-import Auto as aut
+import pandas as pd
 
-c = ct.Contact('Ailton', '5511952278958')
+class Teste:
+    def tTeste(self, nome:str):
+        return nome
 
-texto = 'Boa noite {name}, tudo bem?\nSou uma mensagem automatica'
-auto = aut.Auto('firefox')
+    def __init__(self, nome:str):
+        self.nome = self.tTeste(nome)
+        print(self.nome)
 
-auto.loginWhats()
-auto.sendMensage(c, 'none', texto)
+teste = Teste('Ola')
