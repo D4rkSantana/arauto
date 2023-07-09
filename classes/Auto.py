@@ -107,7 +107,6 @@ class Auto:
         parse_text = text
         parse_text = parse_text.replace("{name}", contact.getName())
         parse_text = quote(parse_text)
-        print(parse_text)
         link = f"http://web.whatsapp.com/send?phone={contact.getNumber()}&text={parse_text}"
         self.browser.get(link)
         self.waitLoad()

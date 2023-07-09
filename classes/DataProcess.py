@@ -41,6 +41,7 @@ class DataProcess:
             self.qt_contacts = 0
             self.contacts = self.__createContacts()
         else:
+            print('c')
             self.table_df = 'none'
             self.archive = 'none'
             self.expected_time = 0
@@ -53,7 +54,7 @@ class DataProcess:
         if table.find('.xlsx') == -1:
             print('Table file error')
             return False
-        if archive.find('.jpg') == -1:
+        elif archive.find('.jpg') == -1:
             print('archive file error')
             return False
         return True
@@ -62,14 +63,15 @@ class DataProcess:
         """ Reads the table, saves and returns the contacts in a Contact vector. """
         contacts = []
         size = len(self.table_df)
+        print(size)
         if size < 1:
             return False
         for i in range(size):
             name = self.table_df.loc[i, 'Nome']
             number_phone = str(self.table_df.loc[i, 'Numero'])
-            if name != '' and len(number_phone) < 11:
+            if name != '' and len(number_phone) > 10:
                 temp = ct.Contact(name, number_phone)
                 contacts.append(temp)
-                self.expected_time += temp.getTime()
+                self.expected_time += temp.total_time
                 self.qt_contacts += 1
         return contacts

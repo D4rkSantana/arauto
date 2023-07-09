@@ -17,7 +17,7 @@ class Contact:
                 'time3':10,
                 'time4':2,
             }
-        total_time = Total waiting time.
+        total_time (int): Total waiting time.
 
     Methods:
         getName(): Return name.
