@@ -40,13 +40,6 @@ def create_buttons(window):
     buttons['bt_send'] = tk.Button(window, text="Enviar Tudo", command=printAlgo)
     return buttons
 
-def create_textbox(window):
-    textbox = {
-        'table_file': None,
-        ''
-    }
-
-
 window = tk.Tk()
 
 buttons = create_buttons(window)
