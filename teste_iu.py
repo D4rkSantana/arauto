@@ -1,13 +1,20 @@
 import tkinter as tk
 
-def printAlgo():
-    print("ola mundo")
-
 janela = tk.Tk()
 
-title = tk.Label(janela, text="Titulo")
-buttom = tk.Button(janela, text="click aqui", command=printAlgo)
-title.pack()
-buttom.pack()
+escolha = tk.StringVar()
+
+def selecionar_opcao():
+    opcao_selecionada = escolha.get()
+    print("Opção selecionada:", opcao_selecionada)
+
+# Cria os botões de opção
+opcao1 = tk.Radiobutton(janela, text="Firefox", variable=escolha, value="firefox", command=selecionar_opcao)
+opcao2 = tk.Radiobutton(janela, text="Chrome", variable=escolha, value="chrome", command=selecionar_opcao)
+
+# Posiciona os botões de opção na janela
+opcao1.pack()
+opcao2.pack()
+
 
 janela.mainloop()

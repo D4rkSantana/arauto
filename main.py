@@ -19,3 +19,43 @@ machine.loginWhats()
 #send_all()
 
 window.mainloop()
+
+
+import tkinter as tk
+
+def printAlgo():
+    print("ola mundo")
+
+def create_buttons(window):
+    buttons = {
+        'bt_table': None,
+        'bt_browser': None,
+        'bt_login': None,
+        'bt_send': None
+        }
+
+    buttons['bt_table'] = tk.Button(window, text="Definir", command=printAlgo)
+    buttons['bt_browser'] = tk.Button(window, text="Inicializar", command=printAlgo)
+    buttons['bt_login'] = tk.Button(window, text="Logar", command=printAlgo)
+    buttons['bt_send'] = tk.Button(window, text="Enviar Tudo", command=printAlgo)
+    return buttons
+
+def create_textbox(window):
+    textbox = {
+        'table_file': None,
+        ''
+    }
+
+
+window = tk.Tk()
+
+buttons = create_buttons(window)
+
+title = tk.Label(window, text="Titulo")
+title.grid(row=0, column=0, padx=10, pady=10)
+bt_table = tk.Button(window, text="click aqui", command=printAlgo)
+bt_init_browser = tk.Button(window, text="click aqui", command=printAlgo)
+bt_login = tk.Button(window, text="click aqui", command=printAlgo)
+buttom.grid(row=1, column=0, padx=10, pady=10)
+
+window.mainloop()
