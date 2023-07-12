@@ -1,12 +1,16 @@
 import tkinter as tk
+from . import Auto as auto
+from . import DataProcess as dp
 
 class Interface:
-    def __init__(self):
+    def __init__(self, auto, data):
         self.level = 0
         self.window = tk.Tk()
         self.browser = None
         self.browser_arg = tk.StringVar()
         self.path_table = None
+        self.auto = auto
+        self.data = data
 
         self.buttons = self.__crateButtons()
         self.labels_status = self.__createStatus()
@@ -75,7 +79,10 @@ class Interface:
 
     def __clickTable(self):
         self.path_table = self.entry_table.get()
-        self.labels_infos['path_table'].config(text=self.path_table)
+        if self.path_table != '':
+            self.data.initTable(self.path_table)
+            self.labels_status['status_table'].config(text="Status: Definido")
+            self.labels_infos['path_table'].config(text=self.path_table)
 
     def __clickBrowser(self):
         if self.level > 0:

@@ -12,60 +12,41 @@ class DataProcess:
 
     Attributes:
         table_df (DataFrame): DataFrame of the spreadsheet sent.
-        archive (str): absolute path to the image that will be uploaded.
+        file (str): absolute path to the image that will be uploaded.
         expected_time (int): Estimated time to send all messages.
         qt_contacts (int): Number of contacts to send messages.
         contacts (list): List of Contact objects.
 
     Example of use:
-        data = DataProcess('files/table.xlsx', 'files/image.jpg')
-        print(data.table_df)
-        print(data.archive)
-        print(data.expected_time)
-        for contact in data.contacts:
-            print(contact.name)
+        data = DataProcess()
+        data.initTable('table.xlsx')
     """
 
-    def __init__(self, table:str, archive:str):
-        """ 
-        Initialize DataProcess with table and image
-
-        Args:
-            table (str): path to table '.xslx'
-            archive (str): path to a '.jpg' image
-        """
-        if self.__checkArgs(table, archive):
-            self.table_df = pd.read_excel(table)
-            self.archive = os.path.abspath(archive)
+    def __init__(self):
+            self.table_df = None
+            self.file = None
             self.expected_time = 0
             self.qt_contacts = 0
+            self.contacts = None
+
+    def initTable(self, path:str):
+        if path.find('.xlsx') != -1:
+            self.table_df = pd.read_excel(path)
             self.contacts = self.__createContacts()
-        else:
-            print('c')
-            self.table_df = 'none'
-            self.archive = 'none'
-            self.expected_time = 0
-            self.qt_contacts = 0
-            self.contacts = 0
 
-
-    def __checkArgs(self, table:str, archive:str):
-        """ Check the attached table and image file extension, in case of error returns False. """
-        if table.find('.xlsx') == -1:
-            print('Table file error')
-            return False
-        elif archive.find('.jpg') == -1:
-            print('archive file error')
-            return False
-        return True
+    def initFile(self, file:str):
+        if file.find('.jpg') != -1:
+            self.file = os.path.abspath(file)
 
     def __createContacts(self):
         """ Reads the table, saves and returns the contacts in a Contact vector. """
+        if self.table_df == None:
+            return
         contacts = []
         size = len(self.table_df)
         print(size)
         if size < 1:
-            return False
+            return None
         for i in range(size):
             name = self.table_df.loc[i, 'Nome']
             number_phone = str(self.table_df.loc[i, 'Numero'])

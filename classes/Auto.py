@@ -60,34 +60,39 @@ class Auto:
         browser (str): browser name.
 
     Methods:
-        waitLoad(): Wait for WhatsApp to load.
-
-    Example of use:
-        template = Template('arg')
-        template.printTemp()
+        initXpath(path_config:str): inicializa o Xpath
+        initBrowser(browser_name:str): inicializa o browser
+        loginWhats(): incializa o whatsapp e aguarda a confirmação do login
+        sendMensage(contact:Contact, mensage:str, file:str): envia uma mensagem para o contato
+        
     """
-    def __init__(self, browser:str, config_file:str):
-        """
-        Args:
-            broser (str): name of browser.
-            config_file (str): path to config file.
-        """
+    def __init__(self, ):
+        self.xpath = None
+        self.browser = None
+
+    def initXpath(self, config_file:str):
         self.xpath = Xpath(config_file)
+
+    def initBrowser(self, browser:str):
         if browser == "firefox":
             self.browser = webdriver.Firefox()
         elif browser == "chrome":
             self.browser = webdriver.Chrome()
 
-    def waitLoad(self):
+    def __waitLoad(self):
         """ Wait for whatsapp to load the message screen. """
+        if self.browser == None:
+            return
         while len(self.browser.find_elements("id", "side")) < 1:
             time.sleep(1)
         time.sleep(4)
 
     def loginWhats(self):
         """ launches whatsapp to be logged in and waits to load the message screen """
+        if self.browser == None:
+            return
         self.browser.get('https://web.whatsapp.com/')
-        self.waitLoad()
+        self.__waitLoad()
 
     def sendMensage(self, contact:Contact, text:str, file:str='none'):
         '''
@@ -104,12 +109,14 @@ class Auto:
         Example of use:
             auto.sendMensage(contact, 'ola {nome}, tudo bem?', 'C:\\Users\\imagem.jpg').
         '''
+        if self.browser == None or self.xpath == None:
+            return
         parse_text = text
         parse_text = parse_text.replace("{name}", contact.getName())
         parse_text = quote(parse_text)
         link = f"http://web.whatsapp.com/send?phone={contact.getNumber()}&text={parse_text}"
         self.browser.get(link)
-        self.waitLoad()
+        self.__waitLoad()
         self.browser.find_element(By.XPATH, self.xpath.send_msg).click()
         time.sleep(contact.times['send_msg'])
         if file != 'none':
