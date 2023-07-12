@@ -29,10 +29,10 @@ class Xpath:
         Args:
             archive_path (str): path to xpath configure file
         """
-        self.send_msg = ''
-        self.attach = ''
-        self.input_doc = ''
-        self.input_send = ''
+        self.send_msg = None
+        self.attach = None
+        self.input_doc = None
+        self.input_send = None
         self.__config(archive_path)
 
     def __config(self, archive_path:str):
@@ -76,14 +76,19 @@ class Auto:
     def initBrowser(self, browser:str):
         if browser == "firefox":
             self.browser = webdriver.Firefox()
+            return True
         elif browser == "chrome":
             self.browser = webdriver.Chrome()
+            return True
+        else:
+            print("error browser: ", browser)
+            return False
 
     def __waitLoad(self):
         """ Wait for whatsapp to load the message screen. """
         if self.browser == None:
             return
-        while len(self.browser.find_elements("id", "side")) < 1:
+        while len(self.browser.find_elements(By.ID, "side")) < 1:
             time.sleep(1)
         time.sleep(4)
 
